@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ITWIRE SRLS</title>
+  <meta name="description" content="ITWIRE SRLS — Soluzioni IT, networking, sicurezza e assistenza tecnica." />
+
+  <style>
+    :root{
+      --bg0:#050b12;
+      --bg1:#07121a;
+      --bg2:#0b1e2b;
+
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --line: rgba(255,255,255,.14);
+      --card: rgba(255,255,255,.06);
+
+      --accent:#2aa9c9;    /* azzurro ITWIRE */
+      --accent2:#6dd6ff;   /* highlight */
+      --warn:#fbbf24;
+      --ok:#34d399;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 15% 12%, rgba(42,169,201,.35), transparent 60%),
+        radial-gradient(900px 520px at 85% 10%, rgba(109,214,255,.14), transparent 55%),
+        radial-gradient(1100px 720px at 55% 90%, rgba(42,169,201,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg2));
+      line-height: 1.55;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 24px; }
+    .hide{ display:none !important; }
+
+    /* NAV */
+    header{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5,11,18,.82), rgba(5,11,18,.35));
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 180px;
+    }
+    .brand img{
+      width: 130px;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+    }
+    .links{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .chip{
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: 14px;
+      transition: .2s transform, .2s background, .2s border, .2s color;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(109,214,255,.35);
+      color: var(--text);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor: pointer;
+      user-select:none;
+      font-weight: 700;
+      transition: .2s transform, .2s background, .2s border, .2s filter;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.25); }
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #06202b;
+    }
+    .btn.primary:hover{ filter: brightness(1.04); }
+    .btn.ghost{
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    /* HERO */
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+    .hero{
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 260px at 20% 20%, rgba(109,214,255,.18), transparent 60%);
+      pointer-events:none;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height: 1.12;
+      letter-spacing: .2px;
+      position: relative;
+    }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 72ch;
+      font-size: 16px;
+      position: relative;
+    }
+    .actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 12px; position:relative; }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 18px;
+      position: relative;
+    }
+    .kpi{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+    .kpi b{ display:block; font-size: 18px; }
+    .kpi span{ color: var(--muted); font-size: 13px; }
+
+    .side{ display:grid; gap: 12px; }
+    .card{
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+    }
+    .cardTitle{ margin:0 0 6px; font-weight: 900; letter-spacing:.2px; }
+    .muted{ color: var(--muted); margin:0; }
+
+    /* SECTIONS */
+    section{ padding: 40px 0; }
+    .sectionTitle{ margin:0 0 10px; font-size: 22px; letter-spacing:.2px; }
+    .sectionDesc{ margin:0 0 18px; color: var(--muted); max-width: 80ch; }
+
+    .features{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+    .feature{
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      min-height: 150px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(42,169,201,.16);
+    }
+    .feature h3{ margin: 10px 0 6px; font-size: 16px; }
+    .feature p{ margin: 0; color: var(--muted); font-size: 14px; }
+
+    .projects{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .project{
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+    .project b{ display:block; margin-bottom: 6px; }
+    .project small{ color: var(--muted); }
+
+    /* CONTACT */
+    .contactGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    input, textarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      outline: none;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus{
+      border-color: rgba(109,214,255,.55);
+      box-shadow: 0 0 0 4px rgba(109,214,255,.16);
+    }
+    .formRow{ display:grid; gap: 10px; }
+
+    footer{
+      border-top: 1px solid var(--line);
+      padding: 18px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .legal{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* MODAL */
+    .backdrop{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      display:flex; align-items:center; justify-content:center;
+      padding: 18px;
+      z-index: 1000;
+    }
+    .modal{
+      width: min(920px, 100%);
+      max-height: min(84vh, 860px);
+      overflow:auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(8,18,26,.95), rgba(8,18,26,.88));
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .modal h3{ margin: 8px 0 6px; }
+    .modal p, .modal li{ color: var(--muted); }
+    .modalTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+    .modalTop b{ font-size: 16px; }
+    .x{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    /* COOKIE BANNER */
+    .cookieBanner{
+      position: fixed;
+      left: 18px; right: 18px; bottom: 18px;
+      z-index: 1200;
+      max-width: 980px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(8,18,26,.95), rgba(8,18,26,.88));
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .cookieGrid{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .cookieGrid p{ margin:0; color: var(--muted); font-size: 13px; }
+    .cookieActions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .features{ grid-template-columns: 1fr; }
+      .projects{ grid-template-columns: 1fr; }
+      .contactGrid{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
+      .links{ display:none; }
+      .brand img{ width: 110px; }
+      .cookieGrid{ grid-template-columns: 1fr; }
+      .cookieActions{ justify-content:flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <img src="logo.png" alt="ITWIRE logo" />
+      </div>
+
+      <nav class="links" aria-label="Navigazione">
+        <a class="chip" href="#servizi">Servizi</a>
+        <a class="chip" href="#progetti">Progetti</a>
+        <a class="chip" href="#chi-siamo">Chi siamo</a>
+        <a class="chip" href="#contatti">Contatti</a>
+        <a class="chip" href="#privacy" id="openPrivacyLink">Privacy</a>
+      </nav>
+
+      <a class="btn primary" href="#contatti">Richiedi info</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <div class="heroGrid">
+      <section class="hero" aria-label="Hero">
+        <h1>Soluzioni IT snelle, sicure, affidabili.</h1>
+        <p class="sub">
+          ITWIRE SRLS supporta aziende e professionisti con networking, sicurezza, cloud e assistenza tecnica.
+          Un approccio pratico: analisi → proposta → implementazione → supporto.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#servizi">Scopri i servizi</a>
+          <button class="btn ghost" type="button" id="openCookiePrefs">Preferenze cookie</button>
+        </div>
+
+        <div class="kpis" aria-label="Punti chiave">
+          <div class="kpi"><b>Networking</b><span>LAN/Wi-Fi, firewall, VPN</span></div>
+          <div class="kpi"><b>Sicurezza</b><span>Hardening, MFA, backup</span></div>
+          <div class="kpi"><b>Supporto</b><span>On-site e da remoto</span></div>
+        </div>
+      </section>
+
+      <aside class="side" aria-label="Informazioni">
+        <div class="card">
+          <p class="cardTitle">⚡ Interventi rapidi</p>
+          <p class="muted">Assistenza e troubleshooting con priorità e SLA (se richiesto).</p>
+        </div>
+        <div class="card">
+          <p class="cardTitle">🔒 Sicurezza</p>
+          <p class="muted">Segmentazione rete, VPN, policy, aggiornamenti e riduzione del rischio.</p>
+        </div>
+        <div class="card">
+          <p class="cardTitle">📍 Sede</p>
+          <p class="muted">Carpi (MO) — operatività anche da remoto.</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- SERVIZI -->
+    <section id="servizi">
+  <h2 class="sectionTitle">Servizi</h2>
+  <p class="sectionDesc">
+    Dalla consulenza alla gestione continua: scegli un intervento singolo o un pacchetto gestito.
+  </p>
+
+  <div class="features">
+    <div class="feature">
+      <span class="badge"><span class="dot"></span> Networking & Wi-Fi</span>
+      <h3>Reti aziendali solide</h3>
+      <p>Progettazione e ottimizzazione LAN/Wi-Fi, VLAN, QoS, copertura e performance.</p>
+    </div>
+
+    <div class="feature">
+      <span class="badge"><span class="dot"></span> Sicurezza</span>
+      <h3>Protezione concreta</h3>
+      <p>Firewall, VPN, MFA, segmentazione, patching e buone pratiche operative.</p>
+    </div>
+
+    <div class="feature">
+      <span class="badge"><span class="dot"></span> Cablaggio strutturato</span>
+      <h3>Rame e fibra ottica</h3>
+      <p>Progettazione e posa di cablaggi strutturati in rame e fibra: patch panel, armadi rack, certificazione e collaudo.</p>
+    </div>
+
+    <div class="feature">
+      <span class="badge"><span class="dot"></span> Assistenza IT</span>
+      <h3>Supporto per team</h3>
+      <p>Helpdesk, gestione dispositivi, manutenzione e interventi programmati.</p>
+    </div>
+
+    <div class="feature">
+      <span class="badge"><span class="dot"></span> Consulenza</span>
+      <h3>Roadmap e audit</h3>
+      <p>Analisi infrastruttura e priorità: interventi chiari, tempi e budget sotto controllo.</p>
+    </div>
+
+    <div class="feature">
+      <span class="badge"><span class="dot"></span> Videosorveglianza</span>
+      <h3>Impianti Tvcc IP</h3>
+      <p>Porgettazione, installazione, configurazione e supporto post-vendita.</p>
+    </div>
+  </div>
+</section>
+
+
+    <!-- PROGETTI -->
+    <section id="progetti">
+      <h2 class="sectionTitle">Progetti</h2>
+      <p class="sectionDesc"></p>
+
+      <div class="projects">
+        <div class="project">
+          <b>Wi-Fi Industriale</b>
+          <small>Survey → ottimizzazione canali → roaming stabile → copertura migliorata.</small>
+        </div>
+        <div class="project">
+          <b>Firewall + VPN per lavoro remoto</b>
+          <small>Accesso sicuro, policy utenti, MFA e segmentazione.</small>
+        </div>
+        <div class="project">
+          <b>Revamping Tecnologico</b>
+          <small>Switch, Access Point, Firewall e Rack Remediation.</small>
+        </div>
+        <div class="project">
+          <b>Cablaggio Magazzini Logistici</b>
+          <small>Rack, Fibra ottica, Rame, Intestazione e Certificazione.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHI SIAMO -->
+    <section id="chi-siamo">
+      <h2 class="sectionTitle">Chi siamo</h2>
+      <p class="sectionDesc">
+        ITWIRE SRLS è specializzata in infrastrutture IT e sicurezza. Lavoriamo con un approccio pratico,
+        orientato alla riduzione del rischio e alla stabilità operativa.
+      </p>
+
+      <div class="card">
+        <p class="cardTitle">Il nostro approccio</p>
+        <p class="muted">1) Analisi • 2) Proposta • 3) Implementazione • 4) Supporto e miglioramento continuo.</p>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti">
+  <h2 class="sectionTitle">Contatti</h2>
+  <p class="sectionDesc">
+    Per informazioni o richieste commerciali puoi contattarci direttamente ai recapiti qui sotto.
+  </p>
+
+  <div class="contactGrid">
+    <div class="card">
+      <p class="cardTitle">Dati aziendali</p>
+      <p class="muted" style="margin-bottom:10px;">
+        <b style="color:var(--text)">ITWIRE SRLS</b><br/>
+        VIA SILVIO PELLICO 4<br/>
+        41012 - Carpi (MO) - IT<br/><br/>
+
+        <b style="color:var(--text)">P.IVA:</b> IT04219080365<br/>
+        <b style="color:var(--text)">C.F.:</b> 04219080365<br/><br/>
+
+        <b style="color:var(--text)">Email:</b> 
+        <a href="mailto:info@itwire.it" style="color:var(--accent); font-weight:600;">
+          info@itwire.it
+        </a><br/>
+
+        <b style="color:var(--text)">Telefono:</b> 
+        <a href="tel:+390598777023" style="color:var(--accent); font-weight:600;">
+          +39 0598777023
+        </a>
+      </p>
+    </div>
+
+    <div class="card">
+      <p class="cardTitle">Orari</p>
+      <p class="muted">
+        Lunedì – Venerdì<br/>
+        08:00 – 18:00<br/><br/>
+      </p>
+
+      <div style="margin-top:15px;">
+        <a href="mailto:info@itwire.it" class="btn primary">Scrivici</a>
+        <a href="tel:+390598777023" class="btn ghost">Chiama ora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <footer>
+      <div>
+        © <span id="year"></span> ITWIRE SRLS<br/>
+        VIA SILVIO PELLICO 4 – 41012 Carpi (MO) – Italia<br/>
+        P.IVA: IT04219080365 – C.F.: 04219080365
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn ghost" type="button" id="footerPrivacy">Privacy</button>
+        <button class="btn ghost" type="button" id="footerCookies">Cookie</button>
+        <button class="btn ghost" type="button" id="footerPrefs">Preferenze cookie</button>
+      </div>
+    </footer>
+  </main>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookieBanner" class="cookieBanner hide" role="dialog" aria-live="polite" aria-label="Banner cookie">
+    <div class="cookieGrid">
+      <div>
+        <div class="pill" style="margin-bottom:8px;">
+          <span style="width:8px;height:8px;border-radius:999px;background:var(--warn);display:inline-block"></span>
+          Cookie & privacy
+        </div>
+        <p>
+          Usiamo cookie tecnici necessari e, solo con consenso, cookie analitici e di profilazione.
+          Puoi accettare, rifiutare o gestire le preferenze.
+          <a href="#privacy" id="bannerPrivacy" style="text-decoration:underline; color: var(--text);">Leggi Privacy/Cookie</a>.
+        </p>
+      </div>
+      <div class="cookieActions">
+        <button class="btn ghost" id="cookieReject" type="button">Rifiuta</button>
+        <button class="btn ghost" id="cookiePrefs" type="button">Preferenze</button>
+        <button class="btn primary" id="cookieAccept" type="button">Accetta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COOKIE PREFERENCES -->
+  <div id="prefsBackdrop" class="backdrop hide" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Preferenze cookie">
+      <div class="modalTop">
+        <div>
+          <b>Preferenze cookie</b>
+          <div class="muted" style="margin-top:4px;">Scegli quali cookie consentire. I cookie tecnici sono sempre attivi.</div>
+        </div>
+        <button class="x" type="button" id="prefsClose">Chiudi</button>
+      </div>
+
+      <div class="card" style="box-shadow:none;">
+        <p class="cardTitle">Cookie tecnici (necessari)</p>
+        <p class="muted">Sempre attivi: servono al funzionamento del sito (es. salvataggio preferenze cookie).</p>
+        <div class="pill"><span class="dot"></span> Sempre attivi</div>
+      </div>
+
+      <div class="card" style="box-shadow:none;">
+        <p class="cardTitle">Cookie analitici</p>
+        <p class="muted">Aiutano a capire come viene usato il sito (statistiche aggregate). Attivi solo con consenso.</p>
+        <label class="pill" style="cursor:pointer;">
+          <input id="consentAnalytics" type="checkbox" style="accent-color: var(--accent); transform: translateY(1px);" />
+          Abilita analitici
+        </label>
+      </div>
+
+      <div class="card" style="box-shadow:none;">
+        <p class="cardTitle">Cookie di profilazione</p>
+        <p class="muted">Usati per marketing/remarketing. Attivi solo con consenso.</p>
+        <label class="pill" style="cursor:pointer;">
+          <input id="consentMarketing" type="checkbox" style="accent-color: var(--accent); transform: translateY(1px);" />
+          Abilita profilazione
+        </label>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+        <button class="btn ghost" id="prefsSave" type="button">Salva preferenze</button>
+        <button class="btn primary" id="prefsAcceptAll" type="button">Accetta tutto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PRIVACY & COOKIE POLICY -->
+  <div id="policyBackdrop" class="backdrop hide" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Privacy e Cookie Policy">
+      <div class="modalTop">
+        <div>
+          <b id="policyTitle">Informative</b>
+          <div class="muted" style="margin-top:4px;">Documento informativo (template) — personalizzabile.</div>
+        </div>
+        <button class="x" type="button" id="policyClose">Chiudi</button>
+      </div>
+
+      <div id="policyContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // ========= Helpers =========
+    const $ = (s) => document.querySelector(s);
+    const year = new Date().getFullYear();
+    $("#year").textContent = year;
+
+    // ========= Form demo =========
+    const form = $("#contactForm");
+    const formMsg = $("#formMsg");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      formMsg.textContent = "Messaggio pronto! (Demo) Dimmi dove vuoi ricevere le richieste e lo collego.";
+      form.reset();
+    });
+
+    // ========= Cookie Consent (localStorage) =========
+    // Stato consenso: { decided: true/false, analytics: bool, marketing: bool, ts: ISO }
+    const CONSENT_KEY = "itwire_cookie_consent_v1";
+
+    function getConsent(){
+      try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || "null"); }
+      catch { return null; }
+    }
+    function setConsent(consent){
+      localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    }
+
+    function showBannerIfNeeded(){
+      const c = getConsent();
+      if(!c || !c.decided){
+        $("#cookieBanner").classList.remove("hide");
+      }
+    }
+    function hideBanner(){
+      $("#cookieBanner").classList.add("hide");
+    }
+
+    function applyConsent(){
+      const c = getConsent();
+      if(!c || !c.decided) return;
+
+      // Qui puoi caricare script SOLO se consentiti.
+      // Esempio (placeholder): analytics
+      if(c.analytics){
+        // loadAnalytics();
+        console.log("Analytics consentito (placeholder).");
+      }
+      if(c.marketing){
+        // loadMarketing();
+        console.log("Marketing consentito (placeholder).");
+      }
+    }
+
+    // ========= Preferences Modal =========
+    const prefsBackdrop = $("#prefsBackdrop");
+    const consentAnalytics = $("#consentAnalytics");
+    const consentMarketing = $("#consentMarketing");
+
+    function openPrefs(){
+      const c = getConsent();
+      consentAnalytics.checked = !!(c && c.analytics);
+      consentMarketing.checked = !!(c && c.marketing);
+
+      prefsBackdrop.classList.remove("hide");
+      prefsBackdrop.setAttribute("aria-hidden","false");
+    }
+    function closePrefs(){
+      prefsBackdrop.classList.add("hide");
+      prefsBackdrop.setAttribute("aria-hidden","true");
+    }
+
+    $("#cookiePrefs").addEventListener("click", openPrefs);
+    $("#openCookiePrefs").addEventListener("click", openPrefs);
+    $("#footerPrefs").addEventListener("click", openPrefs);
+    $("#prefsClose").addEventListener("click", closePrefs);
+
+    $("#prefsSave").addEventListener("click", () => {
+      setConsent({
+        decided: true,
+        analytics: consentAnalytics.checked,
+        marketing: consentMarketing.checked,
+        ts: new Date().toISOString()
+      });
+      closePrefs();
+      hideBanner();
+      applyConsent();
+    });
+
+    $("#prefsAcceptAll").addEventListener("click", () => {
+      setConsent({ decided:true, analytics:true, marketing:true, ts: new Date().toISOString() });
+      closePrefs();
+      hideBanner();
+      applyConsent();
+    });
+
+    // ========= Banner buttons =========
+    $("#cookieAccept").addEventListener("click", () => {
+      setConsent({ decided:true, analytics:true, marketing:true, ts: new Date().toISOString() });
+      hideBanner();
+      applyConsent();
+    });
+    $("#cookieReject").addEventListener("click", () => {
+      setConsent({ decided:true, analytics:false, marketing:false, ts: new Date().toISOString() });
+      hideBanner();
+      applyConsent();
+    });
+
+    // ========= Policy Modal =========
+    const policyBackdrop = $("#policyBackdrop");
+    const policyTitle = $("#policyTitle");
+    const policyContent = $("#policyContent");
+
+    const company = {
+      name: "ITWIRE SRLS",
+      vat: "IT04219080365",
+      cf: "04219080365",
+      address: "VIA SILVIO PELLICO 4, 41012 - Carpi (MO) - IT",
+      email: "info@itwire.it",    
+      phone: "+39 0598777023",           
+      updated: `${year}-01-01`       // <-- SOSTITUISCI data ultima revisione
+    };
+
+    function openPolicy(kind){
+      policyBackdrop.classList.remove("hide");
+      policyBackdrop.setAttribute("aria-hidden","false");
+
+      if(kind === "privacy"){
+        policyTitle.textContent = "Privacy Policy";
+        policyContent.innerHTML = privacyHTML();
+      }else if(kind === "cookie"){
+        policyTitle.textContent = "Cookie Policy";
+        policyContent.innerHTML = cookieHTML();
+      }else{
+        policyTitle.textContent = "Privacy & Cookie";
+        policyContent.innerHTML = privacyHTML() + "<hr style='border:0;border-top:1px solid var(--line);margin:18px 0;'/>" + cookieHTML();
+      }
+      // scroll top
+      policyBackdrop.querySelector(".modal").scrollTop = 0;
+    }
+
+    function closePolicy(){
+      policyBackdrop.classList.add("hide");
+      policyBackdrop.setAttribute("aria-hidden","true");
+    }
+    $("#policyClose").addEventListener("click", closePolicy);
+
+    // Open policy links/buttons
+    $("#openPrivacyBtn").addEventListener("click", () => openPolicy("privacy"));
+    $("#openCookieBtn").addEventListener("click", () => openPolicy("cookie"));
+    $("#footerPrivacy").addEventListener("click", () => openPolicy("privacy"));
+    $("#footerCookies").addEventListener("click", () => openPolicy("cookie"));
+
+    $("#openPrivacyLink").addEventListener("click", (e) => { e.preventDefault(); openPolicy("privacy"); });
+    $("#openPrivacyFromForm").addEventListener("click", (e) => { e.preventDefault(); openPolicy("privacy"); });
+    $("#bannerPrivacy").addEventListener("click", (e) => { e.preventDefault(); openPolicy("all"); });
+
+    // Close modals when clicking outside
+    prefsBackdrop.addEventListener("click", (e) => { if(e.target === prefsBackdrop) closePrefs(); });
+    policyBackdrop.addEventListener("click", (e) => { if(e.target === policyBackdrop) closePolicy(); });
+
+    // ESC to close modals
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape"){
+        if(!prefsBackdrop.classList.contains("hide")) closePrefs();
+        if(!policyBackdrop.classList.contains("hide")) closePolicy();
+      }
+    });
+
+    // Hash open (optional)
+    if(location.hash === "#privacy"){ openPolicy("privacy"); }
+
+    // ========= Policy templates =========
+    function privacyHTML(){
+      return `
+        <div class="card" style="box-shadow:none;">
+          <p class="cardTitle">Titolare del trattamento</p>
+          <p class="muted">
+            <b style="color:var(--text)">${company.name}</b><br/>
+            ${company.address}<br/>
+            P.IVA: ${company.vat} — C.F.: ${company.cf}<br/>
+            Email: ${company.email} — Tel: ${company.phone}
+          </p>
+          <p class="muted"><small>Ultimo aggiornamento: ${company.updated}</small></p>
+        </div>
+
+        <h3>1. Tipologie di dati trattati</h3>
+        <ul>
+          <li><b>Dati di navigazione</b> (es. indirizzo IP, log tecnici, informazioni sul dispositivo): necessari per il funzionamento e la sicurezza del sito.</li>
+          <li><b>Dati forniti volontariamente</b> (es. nome, email, messaggio inviato tramite form o contatto diretto).</li>
+          <li><b>Cookie e tecnologie simili</b>: vedi Cookie Policy.</li>
+        </ul>
+
+        <h3>2. Finalità e basi giuridiche</h3>
+        <ul>
+          <li><b>Erogazione del servizio e funzionamento del sito</b> (base giuridica: esecuzione di misure precontrattuali/contratto; legittimo interesse per sicurezza).</li>
+          <li><b>Gestione richieste e contatti</b> (base giuridica: esecuzione di misure precontrattuali/contratto; consenso se richiesto).</li>
+          <li><b>Adempimenti legali</b> (base giuridica: obbligo di legge).</li>
+          <li><b>Statistiche/marketing</b> solo con consenso (se attivati): vedi Cookie Policy.</li>
+        </ul>
+
+        <h3>3. Modalità del trattamento</h3>
+        <p class="muted">
+          Il trattamento avviene con strumenti informatici e misure di sicurezza adeguate a proteggere i dati
+          da accessi non autorizzati, perdita o divulgazione.
+        </p>
+
+        <h3>4. Conservazione</h3>
+        <p class="muted">
+          I dati sono conservati per il tempo strettamente necessario alle finalità per cui sono raccolti e,
+          ove applicabile, per i tempi previsti da obblighi di legge.
+        </p>
+
+        <h3>5. Destinatari e responsabili</h3>
+        <p class="muted">
+          I dati possono essere trattati da fornitori tecnici (es. hosting, manutenzione, servizi email)
+          nominati, ove necessario, Responsabili del trattamento. L’elenco può essere richiesto al Titolare.
+        </p>
+
+        <h3>6. Trasferimenti extra UE</h3>
+        <p class="muted">
+          In caso di utilizzo di servizi con server fuori dallo SEE, il trasferimento avverrà nel rispetto della normativa,
+          tramite garanzie adeguate (es. Decisioni di adeguatezza, SCC).
+        </p>
+
+        <h3>7. Diritti dell’interessato</h3>
+        <ul>
+          <li>Accesso, rettifica, cancellazione, limitazione, opposizione, portabilità.</li>
+          <li>Revoca del consenso (senza pregiudicare la liceità del trattamento precedente).</li>
+          <li>Reclamo all’Autorità di controllo (Garante per la Protezione dei Dati Personali).</li>
+        </ul>
+
+        <h3>8. Contatti</h3>
+        <p class="muted">
+          Per esercitare i diritti o richiedere informazioni: <b style="color:var(--text)">${company.email}</b>.
+        </p>
+
+        <div class="card" style="box-shadow:none;">
+          <p class="cardTitle">Nota</p>
+          <p class="muted">
+            Questo testo è un modello generale. Va adattato in base ai servizi effettivamente usati (form, CRM, analytics, pixel, newsletter, ecc.).
+          </p>
+        </div>
+      `;
+    }
+
+    function cookieHTML(){
+      return `
+        <div class="card" style="box-shadow:none;">
+          <p class="cardTitle">Cookie Policy</p>
+          <p class="muted">
+            Il sito utilizza cookie e tecnologie simili. Puoi gestire le preferenze tramite “Preferenze cookie”.
+          </p>
+        </div>
+
+        <h3>1. Cosa sono i cookie</h3>
+        <p class="muted">
+          I cookie sono piccoli file di testo che i siti salvano sul dispositivo per memorizzare informazioni
+          (es. preferenze, sessione, statistiche).
+        </p>
+
+        <h3>2. Tipologie usate</h3>
+        <ul>
+          <li><b>Cookie tecnici (necessari)</b>: indispensabili per il funzionamento (es. memorizzare preferenze cookie).</li>
+          <li><b>Cookie analitici</b>: statistiche sull’uso del sito (attivi solo con consenso).</li>
+          <li><b>Cookie di profilazione</b>: marketing/remarketing (attivi solo con consenso).</li>
+        </ul>
+
+        <h3>3. Gestione del consenso</h3>
+        <p class="muted">
+          Alla prima visita puoi accettare, rifiutare o scegliere le preferenze. Puoi modificare in qualsiasi momento tramite:
+          <button class="btn ghost" type="button" onclick="document.querySelector('#openCookiePrefs').click()">Preferenze cookie</button>
+        </p>
+
+        <h3>4. Come disabilitare i cookie dal browser</h3>
+        <p class="muted">
+          Puoi gestire o eliminare i cookie anche dalle impostazioni del browser. Nota: disabilitare cookie tecnici
+          può compromettere il funzionamento del sito.
+        </p>
+
+        <div class="card" style="box-shadow:none;">
+          <p class="cardTitle">Cookie tecnici presenti</p>
+          <ul>
+            <li><b>itwire_cookie_consent_v1</b> — memorizza la tua scelta sui cookie (durata: fino a rimozione).</li>
+          </ul>
+          <p class="muted">
+            Se attivi analitici/profilazione e integri servizi esterni (es. Google Analytics, Meta Pixel),
+            vanno elencati qui con finalità, durata e link alle informative dei fornitori.
+          </p>
+        </div>
+      `;
+    }
+
+    // ========= Start =========
+    showBannerIfNeeded();
+    applyConsent();
+  </script>
+</body>
+</html>
